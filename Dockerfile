@@ -43,6 +43,7 @@ VOLUME /var/log/httpd
 VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
 VOLUME /etc/apache2
+VOLUME /etc/letsencrypt
 
 EXPOSE 80
 EXPOSE 443

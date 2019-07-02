@@ -16,8 +16,7 @@ Based on [fauria/lamp](https://github.com/fauria/docker-lamp)
 * Thrown away most unneeded modules, nmp & stuff
 * Added support for Certbot (Let's encrypt)
 
-Exposed port and volumes
-----
+## Exposed port and volumes
 
 The image exposes ports `80` and `3306`, and exports four volumes:
 
@@ -26,6 +25,7 @@ The image exposes ports `80` and `3306`, and exports four volumes:
 * `/var/www/html`, used as Apache's [DocumentRoot directory](http://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot).
 * `/var/lib/mysql`, where MariaDB data files are stored.
 * `/etc/apache2`, where Apache configuration files are stored.
+* `/etc/letsencrypt` for Certbot's files and keys
 
 Please, refer to https://docs.docker.com/storage/volumes for more information on using host volumes.
 
@@ -33,30 +33,24 @@ The user and group owner id for the DocumentRoot directory `/var/www/html` are b
 
 The user and group owner id for the MariaDB directory `/var/log/mysql` are 105 and 108 repectively (`uid=105(mysql) gid=108(mysql) groups=108(mysql)`).
 
-Use cases
-----
-
-#### Create a temporary container for testing purposes:
+## Usage
 
 ```
-	docker run -i -t --rm varnav/lamp bash
+docker run -d -p 80:80 -p 443:443 --name lamp-1 -v /opt/example.com/html:/var/www/html -v /opt/example.com/letsencrypt:/etc/letsencrypt -v example.com-database:/var/lib/mysql varnav/lamp
 ```
 
-#### Create a temporary container to debug a web app:
+Copy your files to `/opt/example.com/html`
+
+Get HTTPS cert:
 
 ```
-	docker run --rm -p 8080:80 -e LOG_STDOUT=true -e LOG_STDERR=true -e LOG_LEVEL=debug -v /my/data/directory:/var/www/html varnav/lamp
+docker exec -i -t lamp-1 bash
+certbot --apache -d beta.coinfia.com
 ```
 
-#### Create a container linking to another [MySQL container](https://registry.hub.docker.com/_/mysql/):
+## Get inside a running container and open a MariaDB console:
 
 ```
-	docker run -d --link my-mysql-container:mysql -p 8080:80 -v /my/data/directory:/var/www/html -v /my/logs/directory:/var/log/httpd --name my-lamp-container varnav/lamp
-```
-
-#### Get inside a running container and open a MariaDB console:
-
-```
-	docker exec -i -t my-lamp-container bash
-	mysql -u root
+docker exec -i -t lamp-1 bash
+mysql -u root
 ```
