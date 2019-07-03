@@ -5,14 +5,15 @@ varnav/lamp
 [![Docker Build Status](https://api.travis-ci.com/varnav/lamp-docker.svg?branch=master)](https://travis-ci.com/varnav/lamp-docker#)
 [![](https://images.microbadger.com/badges/image/varnav/lamp.svg)](https://microbadger.com/images/varnav/lamp "varnav/lamp")
 
-This Docker container implements a last generation LAMP stack with a set of popular PHP modules. Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
+This Docker container implements a last generation LAMP stack with a set of popular PHP modules. Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function. Certbot allows easy configuration for https.
 
 ## What's special
 
 Based on [fauria/lamp](https://github.com/fauria/docker-lamp)
 
-* Ubuntu updated to 18.04
-* PHP updated to 7.2
+* Ubuntu 18.04
+* PHP 7.2
+* MariaDB 10.4 from official repos
 * Thrown away most unneeded modules, nmp & stuff
 * Added support for Certbot (Let's encrypt)
 

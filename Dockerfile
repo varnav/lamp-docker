@@ -1,14 +1,17 @@
 FROM ubuntu:18.04
 
-LABEL Maintainer = "Evgeny Varnavskiy <varnavruz@gmail.com>" \
-      Description="PHP 7.2 with basic modules + Apache 2.4 + MariaDB + Certbot" \
-	  License="Apache License 2.0"
+LABEL Maintainer = "Evgeny Varnavskiy <varnavruz@gmail.com>"
+LABEL Description="PHP 7.2 with basic modules + Apache 2.4 + MariaDB 10.4 + Certbot"
+LABEL License="Apache License 2.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=dumb
 COPY debconf.selections /tmp/
 RUN apt-get update && apt-get install --no-install-recommends -y software-properties-common \
-&& add-apt-repository -y ppa:certbot/certbot && apt-get update \
+&& apt-key adv -y --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 \
+&& add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.nucleus.be/repo/10.4/ubuntu bionic main' \
+&& add-apt-repository -y ppa:certbot/certbot \
+&& apt-get update \
 && debconf-set-selections /tmp/debconf.selections \
 && apt-get install --no-install-recommends -y zip unzip \
 	php7.2 \
