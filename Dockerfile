@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=dumb
 COPY debconf.selections /tmp/
 RUN apt-get update && apt-get install --no-install-recommends -y software-properties-common \
-&& apt-key adv -y --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 \
+&& apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 \
 && add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.nucleus.be/repo/10.4/ubuntu bionic main' \
 && add-apt-repository -y ppa:certbot/certbot \
 && apt-get update \

@@ -12,3 +12,7 @@ install:
 script:
   - ${HADOLINT} --ignore DL3016 --ignore DL3003 --ignore DL3008 Dockerfile
   - docker build .
+  - docker run --rm -d --name docker-lamp-test varnav/lamp
+  - sleep 10
+  - docker logs docker-lamp-test | head -n 20
+  - docker stop docker-lamp-test
