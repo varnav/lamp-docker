@@ -2,7 +2,7 @@ varnav/lamp
 ==========
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/varnav/lamp.svg?style=plastic)](https://hub.docker.com/r/varnav/lamp/)
-[![Docker Build Status](https://img.shields.io/docker/build/varnav/lamp.svg?style=plastic)](https://hub.docker.com/r/varnav/lamp/builds/)
+[![Docker Build Status](https://api.travis-ci.com/varnav/lamp-docker.svg?branch=master)](https://travis-ci.com/varnav/lamp-docker#)
 [![](https://images.microbadger.com/badges/image/varnav/lamp.svg)](https://microbadger.com/images/varnav/lamp "varnav/lamp")
 
 This Docker container implements a last generation LAMP stack with a set of popular PHP modules. Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
@@ -20,8 +20,6 @@ Based on [fauria/lamp](https://github.com/fauria/docker-lamp)
 
 The image exposes ports `80` and `443`, and exports volumes:
 
-* `/var/log/httpd`, containing Apache log files.
-* `/var/log/mysql` containing MariaDB log files.
 * `/var/www/html`, used as Apache's [DocumentRoot directory](http://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot).
 * `/var/lib/mysql`, where MariaDB data files are stored.
 * `/etc/apache2`, where Apache configuration files are stored.

@@ -7,7 +7,7 @@ LABEL Maintainer = "Evgeny Varnavskiy <varnavruz@gmail.com>" \
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=dumb
 COPY debconf.selections /tmp/
-RUN apt-get update && apt-get install -y software-properties-common \
+RUN apt-get update && apt-get install --no-install-recommends -y software-properties-common \
 && add-apt-repository -y ppa:certbot/certbot && apt-get update \
 && debconf-set-selections /tmp/debconf.selections \
 && apt-get install --no-install-recommends -y zip unzip \
@@ -39,9 +39,7 @@ COPY run-lamp.sh /usr/sbin/
 RUN a2enmod proxy_fcgi setenvif rewrite && a2enconf php7.2-fpm && chmod +x /usr/sbin/run-lamp.sh
 
 VOLUME /var/www/html
-VOLUME /var/log/httpd
 VOLUME /var/lib/mysql
-VOLUME /var/log/mysql
 VOLUME /etc/apache2
 VOLUME /etc/letsencrypt
 
