@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y gpg-agent dirmn
 	php7.2-xmlrpc \
 	php7.2-zip \
 	apache2 \
-	libapache2-mod-php7.0 \
+	libapache2-mod-php7.2 \
 	mariadb-common mariadb-server mariadb-client \
 	postfix \
 	git nodejs npm composer nano mc curl \
