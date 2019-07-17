@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y gpg-agent dirmn
 	php7.2-cli \
 	php7.2-common \
 	php7.2-curl \
-	php7.2-fpm \
 	php7.2-gd \
 	php7.2-intl \
 	php7.2-json \
@@ -30,16 +29,17 @@ RUN apt-get update && apt-get install --no-install-recommends -y gpg-agent dirmn
 	php7.2-xmlrpc \
 	php7.2-zip \
 	apache2 \
+	libapache2-mod-php7.0 \
 	mariadb-common mariadb-server mariadb-client \
 	postfix \
-	git nodejs npm composer nano mc curl ftp \
+	git nodejs npm composer nano mc curl \
 	python-certbot-apache \
 && rm -rf /var/lib/apt/lists/*
 
 COPY index.php /var/www/html/
 COPY run-lamp.sh /usr/sbin/
 
-RUN a2enmod proxy_fcgi setenvif rewrite && a2enconf php7.2-fpm && chmod +x /usr/sbin/run-lamp.sh
+RUN a2enmod proxy_fcgi setenvif rewrite && chmod +x /usr/sbin/run-lamp.sh
 
 VOLUME /var/www/html
 VOLUME /var/lib/mysql
